@@ -1,0 +1,12 @@
+{
+  "name": "marketing-machine",
+  "version": "1.0.0",
+  "description": "Modular marketing skill library — copywriting, SEO, CRO, email sequences, paid ads, A/B testing, and 50+ skills built around reusable foundation context files.",
+  "author": {
+    "name": "Sal",
+    "url": "https://github.com/sal"
+  },
+  "repository": "https://github.com/sal/marketing-machine",
+  "license": "MIT",
+  "keywords": ["marketing", "seo", "cro", "copywriting", "email", "paid-ads", "content-strategy"]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "marketing-machine",
+  "version": "1.0.0",
+  "description": "Modular marketing skill library for Claude Code. 50+ skills covering copywriting, SEO, CRO, email sequences, paid ads, A/B testing, social content, and more — built around reusable foundation context files.",
+  "owner": {
+    "name": "Sal",
+    "email": ""
+  },
+  "plugins": [
+    {
+      "name": "marketing-machine",
+      "version": "1.0.0",
+      "description": "Complete marketing system with 50+ skills: copywriting, SEO audit, AI SEO, CRO, email sequences, paid ads, A/B testing, content strategy, social content, programmatic SEO, referral programs, churn prevention, pricing strategy, sales enablement, and more. Built around reusable foundation files for audience, positioning, customer journey, and brand voice.",
+      "source": "./",
+      "category": "marketing",
+      "keywords": [
+        "marketing",
+        "seo",
+        "cro",
+        "copywriting",
+        "email",
+        "paid-ads",
+        "content-strategy",
+        "a-b-testing",
+        "social-media",
+        "sales-enablement"
+      ]
+    }
+  ]
+}
