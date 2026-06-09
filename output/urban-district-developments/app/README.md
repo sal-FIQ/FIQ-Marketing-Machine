@@ -15,10 +15,10 @@ growth plan for Urban District Developments Inc. No build step, no dependencies.
 Pick any of these — it's just one static HTML file:
 
 - **Open locally:** double-click `index.html` (or open in any browser).
-- **GitHub Pages:** push this folder, enable Pages on the branch, point it at `/content/urban-district-app/`.
-- **Netlify / Vercel / Cloudflare Pages:** drag-and-drop this folder, or connect the repo and set the publish directory to `content/urban-district-app`.
+- **GitHub Pages:** push this folder, enable Pages on the branch, point it at `/output/urban-district-developments/app/`.
+- **Netlify / Vercel / Cloudflare Pages:** drag-and-drop this folder, or connect the repo and set the publish directory to `output/urban-district-developments/app`.
 - **Any static host / S3:** upload `index.html`.
 
 ## Notes
 - All task progress and KPI inputs are stored in the visitor's browser (localStorage) — nothing is sent anywhere.
-- Source diagnostic write-up lives at `content/urban-district-developments-marketing-diagnostic.md`.
+- Source diagnostic write-up lives alongside this folder at `../marketing-diagnostic.md`.
