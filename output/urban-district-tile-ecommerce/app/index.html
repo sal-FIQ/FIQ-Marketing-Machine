@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Urban District — Growth POV &amp; Call Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3efe7; --panel:#fff; --panel2:#f8f5ef; --ink:#16140f; --muted:#76705f;
+    --line:#e3dccc; --accent:#b56a2c; --accent-soft:#f0e2d2;
+    --good:#5b7f52; --warn:#c08a2d; --bad:#b1442f;
+    --radius:4px;
+    --display:'Archivo',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --body:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--ink);text-underline-offset:2px;text-decoration-color:var(--accent)}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 26px 90px}
+  .label{font-family:var(--display);font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:11px;color:var(--accent)}
+
+  header{padding:34px 0 22px}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .topline{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .topline .dot{width:5px;height:5px;background:var(--accent);border-radius:50%}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.5vw,50px);line-height:1.03;letter-spacing:-.02em;margin:14px 0 6px}
+  h1 em{font-style:normal;color:var(--accent)}
+  .sub{color:var(--muted);font-size:15px;max-width:600px}
+
+  /* mode toggle */
+  .mode{display:flex;align-items:center;gap:0;border:1.5px solid var(--ink);border-radius:99px;overflow:hidden;font-family:var(--display);flex:0 0 auto}
+  .mode button{background:transparent;border:0;padding:8px 16px;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;color:var(--ink)}
+  .mode button.on{background:var(--ink);color:var(--bg)}
+  .modehint{font-size:12px;color:var(--muted);margin-top:8px;text-align:right;max-width:240px;margin-left:auto}
+
+  .rule{height:1px;background:var(--line);margin:22px 0 0}
+  nav{position:sticky;top:0;background:rgba(243,239,231,.94);backdrop-filter:blur(10px);z-index:20;display:flex;gap:2px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:32px}
+  nav button{font-family:var(--display);background:transparent;border:0;color:var(--muted);padding:9px 15px;cursor:pointer;font-size:12.5px;font-weight:600;letter-spacing:.03em;border-radius:2px;transition:.15s;position:relative}
+  nav button:hover{color:var(--ink)}
+  nav button.active{background:var(--ink);color:var(--bg)}
+  nav button[data-mode="prep"]:after{content:'';position:absolute;top:8px;right:6px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+  nav button.active[data-mode="prep"]:after{background:var(--bg)}
+  .hidden{display:none!important}
+
+  section{display:none;animation:fade .3s ease}
+  section.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .sec-h{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}
+  .sec-h .no{font-family:var(--display);font-weight:800;font-size:13px;color:var(--accent);letter-spacing:.1em;padding-top:6px}
+  .sec-h .priv{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:2px 9px;align-self:center}
+  h2{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:-.01em;margin:0}
+  .sec-sub{color:var(--muted);margin:4px 0 20px}
+  h3{font-family:var(--display);font-weight:700;font-size:16px;margin:26px 0 12px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin:14px 0}
+  .lead{font-size:17px;line-height:1.55}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;position:relative;overflow:hidden}
+  .stat:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+  .stat .n{font-family:var(--display);font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .stat .l{color:var(--muted);font-size:13px;margin-top:4px;line-height:1.45}
+
+  /* funnel */
+  .funnel{display:flex;flex-direction:column;gap:8px}
+  .fstep{display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px}
+  .fstep .fk{font-family:var(--display);font-weight:800;color:var(--accent);font-size:13px;flex:0 0 26px}
+  .fstep b{font-family:var(--display);display:block}
+  .fstep .lev{color:var(--muted);font-size:13.5px;margin-top:2px}
+  .metric-flag{background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:16px 20px;margin:14px 0}
+  .metric-flag b{font-family:var(--display);color:#fff}
+  .metric-flag .label{color:var(--accent-soft)}
+
+  /* segments */
+  .seg{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .seg .tag{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .seg h4{font-family:var(--display);margin:6px 0 8px;font-size:18px}
+  .seg ul{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13.5px}
+  .seg li{margin:4px 0}
+
+  /* tasks */
+  .phase{margin:20px 0}
+  .phase-h{display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:4px}
+  .phase-h h3{margin:0}
+  .bar{height:6px;background:var(--accent-soft);border-radius:99px;overflow:hidden;flex:1;max-width:200px}
+  .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .35s}
+  .task{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line);border-top:0;background:var(--panel);cursor:pointer;transition:.12s}
+  .phase .task:first-of-type{border-top:1px solid var(--line)}
+  .task:hover{background:var(--panel2)}
+  .cbx{flex:0 0 20px;width:20px;height:20px;border:1.5px solid var(--muted);border-radius:3px;margin-top:2px;display:flex;align-items:center;justify-content:center}
+  .cbx svg{width:13px;height:13px;opacity:0;stroke:var(--bg);stroke-width:3;fill:none}
+  .task.done .cbx{background:var(--accent);border-color:var(--accent)}
+  .task.done .cbx svg{opacity:1}
+  .task .body b{font-family:var(--display);display:block;margin-bottom:3px}
+  .task .body span{color:var(--muted);font-size:13.5px}
+  .task.done .body b{color:var(--muted);text-decoration:line-through}
+
+  /* pitch */
+  .quote{border-left:4px solid var(--accent);background:var(--panel2);padding:16px 20px;border-radius:0 var(--radius) var(--radius) 0;font-size:16px;line-height:1.55}
+  .proof{display:flex;align-items:baseline;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .proof:last-child{border-bottom:0}
+  .proof .pn{font-family:var(--display);font-weight:800;font-size:22px;color:var(--accent);flex:0 0 90px}
+  table{width:100%;border-collapse:collapse;margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  th{font-family:var(--display);color:var(--muted);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;background:var(--panel2)}
+
+  /* questions / flags */
+  .qgroup{margin:16px 0}
+  .qgroup .gl{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .qcard{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:8px 0;cursor:pointer}
+  .qcard:hover{background:var(--panel2)}
+  .qcard.pick{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+  .qcard .star{font-size:18px;color:var(--line)}
+  .qcard.pick .star{color:var(--accent)}
+  .qcard b{font-family:var(--display)}
+  .qcard .why{color:var(--muted);font-size:13px;margin-top:3px}
+  .flag td:first-child{font-weight:600;font-family:var(--display);white-space:nowrap}
+
+  /* fit score */
+  .fit{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--panel);border:1px solid var(--line);border-top:0;padding:13px 16px}
+  #fitwrap .fit:first-child{border-top:1px solid var(--line);border-radius:var(--radius) var(--radius) 0 0}
+  #fitwrap .fit:last-child{border-radius:0 0 var(--radius) var(--radius)}
+  .fit .fl b{font-family:var(--display);display:block}
+  .fit .fl span{color:var(--muted);font-size:13px}
+  .dots{display:flex;gap:6px;flex:0 0 auto}
+  .dot5{width:22px;height:22px;border:1.5px solid var(--muted);border-radius:50%;cursor:pointer;font-family:var(--display);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+  .dot5.fill{background:var(--accent);border-color:var(--accent);color:#fff}
+  .verdict{margin-top:16px;padding:18px 20px;border-radius:var(--radius);font-family:var(--display);font-weight:600}
+  .verdict.go{background:#eaf1e6;border:1px solid var(--good);color:#34492e}
+  .verdict.mid{background:#f7eedb;border:1px solid var(--warn);color:#6b4e16}
+  .verdict.no{background:#f6e3de;border:1px solid var(--bad);color:#6e2316}
+
+  /* templates / cheat */
+  .tmpl{position:relative}
+  pre{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--radius);padding:18px;white-space:pre-wrap;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;color:#33302a;margin:10px 0 0}
+  .copy{font-family:var(--display);position:absolute;top:16px;right:16px;background:var(--ink);border:0;color:var(--bg);font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:2px;cursor:pointer}
+  .copy.ok{background:var(--good)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:13px}
+  .chip.bad{border-color:var(--bad);color:var(--bad)}
+
+  .muted{color:var(--muted)}
+  .reset{font-family:var(--display);background:transparent;border:1px solid var(--line);color:var(--muted);padding:7px 14px;border-radius:2px;cursor:pointer;font-size:12px;font-weight:600}
+  .reset:hover{border-color:var(--bad);color:var(--bad)}
+  footer{margin-top:50px;padding-top:22px;border-top:2px solid var(--ink);color:var(--muted);font-size:12.5px}
+  footer .label{display:block;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topbar">
+      <div>
+        <div class="topline"><span class="dot"></span> Performance Marketing &nbsp;·&nbsp; ~15-min call with Adam Tenzythoff, CEO</div>
+        <h1>Urban District <em>growth POV.</em></h1>
+        <div class="sub">An outside-in growth thesis for the tile e-commerce business — plus private call prep. Built by Sal Avelar.</div>
+      </div>
+      <div>
+        <div class="mode">
+          <button id="mPrep" class="on" onclick="setMode('prep')">Prep view</button>
+          <button id="mShare" onclick="setMode('share')">Share view</button>
+        </div>
+        <div class="modehint" id="modehint">Prep view shows everything, including your private pitch, red flags &amp; fit score.</div>
+      </div>
+    </div>
+    <div class="rule"></div>
+  </header>
+
+  <nav id="nav"></nav>
+
+  <!-- ===== SHARE-SAFE ===== -->
+
+  <!-- OPPORTUNITY -->
+  <section id="opportunity" class="active">
+    <div class="sec-h"><span class="no">01</span><h2>The opportunity</h2></div>
+    <div class="card">
+      <p class="lead" style="margin-top:0">Urban District is a pure-play tile e-commerce platform — <b>10,000+ SKUs, the "world's largest selection"</b> — disrupting a category still run through showrooms and distributors. It serves two very different buyers: <b>builders &amp; contractors</b> (≈60–65% of category volume) and <b>homeowners &amp; designers</b> (higher margin).</p>
+      <p style="margin-bottom:0">The growth engine hinges on one mechanic: the <b>free sample program</b> (up to 25/week). Get a sample in someone's hands and the path to purchase opens. So the whole performance-marketing job reduces to two compounding levers — <b>drive more (right-fit) sample requests</b>, and <b>convert more samples into orders</b> — run differently for builders vs. designers.</p>
+    </div>
+    <div class="grid g3">
+      <div class="stat"><div class="n">10,000+</div><div class="l">SKUs — breadth is the moat vs. TileBar &amp; The Tile Shop</div></div>
+      <div class="stat"><div class="n">≤25/wk</div><div class="l">Free samples per customer — the core funnel entry point</div></div>
+      <div class="stat"><div class="n">2 ICPs</div><div class="l">Builders (volume, repeat) + designers/homeowners (margin)</div></div>
+    </div>
+    <h3>The thesis in one line</h3>
+    <div class="card" style="margin-top:6px">
+      <p style="margin:0">Treat the <b>sample request as the macro top-of-funnel conversion</b> (like an "add to cart"), then engineer a measured nurture + retargeting system that moves samples to purchase — segmented by builder vs. designer, and tied directly to revenue. <span class="muted">It's the same dynamic I scaled at Canon ($19M e-store, +40%); the tile catalog just changes the creative and the segmentation.</span></p>
+    </div>
+  </section>
+
+  <!-- SAMPLE FUNNEL -->
+  <section id="funnel">
+    <div class="sec-h"><span class="no">02</span><h2>The sample funnel</h2></div>
+    <p class="sec-sub">Where the leverage is — and the lever to pull at each stage.</p>
+    <div class="metric-flag"><span class="label">The metric everything ladders to</span><br><b>Sample-to-purchase conversion rate</b> — by segment, by product category, by source. If it isn't measured cleanly, that's job #1.</div>
+    <div class="funnel" id="funnelSteps"></div>
+  </section>
+
+  <!-- 90 DAY -->
+  <section id="plan">
+    <div class="sec-h"><span class="no">03</span><h2>First 90 days</h2></div>
+    <p class="sec-sub">How I'd approach it — instrument first, then optimize, then scale. <button class="reset" onclick="resetTasks()">Reset</button></p>
+    <div id="phases"></div>
+  </section>
+
+  <!-- SEGMENTS -->
+  <section id="segments">
+    <div class="sec-h"><span class="no">04</span><h2>Two engines: B2B &amp; B2C</h2></div>
+    <p class="sec-sub">Same product, two acquisition motions. Most tile players blur them — clarity here is an edge.</p>
+    <div class="grid g2" id="segGrid"></div>
+  </section>
+
+  <!-- ===== PREP-ONLY ===== -->
+
+  <!-- PITCH -->
+  <section id="pitch">
+    <div class="sec-h"><span class="no">05</span><h2>Your pitch</h2><span class="priv">Private</span></div>
+    <p class="sec-sub">Lead with outcomes. Mirror his values: customer-centricity, operational excellence, reinvention, think like builders.</p>
+    <h3>30-second positioning</h3>
+    <div class="quote">"I build growth systems that drive measurable revenue — not just campaigns. At Maropost, marketing drove ~55% of net-new revenue under a system I rebuilt from scratch. At Klick, ~$27M in net-new business by embedding AI into the GTM engine. What excites me about Urban District is owning demand generation end-to-end in high-growth e-commerce, where I can tie marketing directly to revenue."</div>
+    <h3>Proof points to land</h3>
+    <div class="card" style="padding:8px 24px">
+      <div class="proof"><div class="pn">$27M</div><div>Net-new business at <b>Klick</b> (~$60M sourced pipeline; ~$7.5M events; +45% outbound reply rate via AI)</div></div>
+      <div class="proof"><div class="pn">55%</div><div>Of net-new revenue from marketing at <b>Maropost</b> — system built from scratch, scaled without linear spend/headcount</div></div>
+      <div class="proof"><div class="pn">$19M</div><div>E-store revenue at <b>Canon</b> (+40% revenue, +35% engagement) — the closest analog to this role</div></div>
+      <div class="proof"><div class="pn">300%</div><div>Increase in e-store sign-ups via a <b>referral program</b> at Canon (+$1.2M in Q1)</div></div>
+      <div class="proof"><div class="pn">$60M+</div><div>Pipeline at <b>NexJ</b> from a small baseline → contributed to acquisition by Constellation Software</div></div>
+    </div>
+    <h3>Alignment map</h3>
+    <table>
+      <thead><tr><th>What Adam needs</th><th>What you bring</th></tr></thead>
+      <tbody id="alignBody"></tbody>
+    </table>
+  </section>
+
+  <!-- ASK -->
+  <section id="ask">
+    <div class="sec-h"><span class="no">06</span><h2>Ask Adam</h2><span class="priv">Private</span></div>
+    <p class="sec-sub">Pick 3–4. Tap to star your picks (saved). Each shows why it lands.</p>
+    <div id="questions"></div>
+  </section>
+
+  <!-- RED FLAGS -->
+  <section id="flags">
+    <div class="sec-h"><span class="no">07</span><h2>Red flags to listen for</h2><span class="priv">Private</span></div>
+    <p class="sec-sub">Stay alert without being cynical — these decide whether it's a real opportunity.</p>
+    <table class="flag">
+      <thead><tr><th>Flag</th><th>What to watch for</th><th>Why it matters</th></tr></thead>
+      <tbody id="flagBody"></tbody>
+    </table>
+  </section>
+
+  <!-- FIT SCORE -->
+  <section id="fit">
+    <div class="sec-h"><span class="no">08</span><h2>Fit score</h2><span class="priv">Private</span></div>
+    <p class="sec-sub">Score each 1–5 after the call. Saved in this browser. <button class="reset" onclick="resetFit()">Reset</button></p>
+    <div id="fitwrap"></div>
+    <div id="verdict" class="verdict mid">Score the dimensions to see a recommendation.</div>
+    <p class="muted" style="font-size:13px">Rule: 6+ dimensions at 4–5 → strong proceed. 3+ below 3 → resolve serious concerns before the next step.</p>
+  </section>
+
+  <!-- CHEAT SHEET -->
+  <section id="cheat">
+    <div class="sec-h"><span class="no">09</span><h2>Cheat sheet</h2><span class="priv">Private</span></div>
+    <p class="sec-sub">Review 5 minutes before. Tone: calm, sharp, concise, commercially aware — a peer conversation, not an audition.</p>
+
+    <h3>Executive phrases</h3>
+    <div class="chips">
+      <span class="chip">"The way I'd think about that is…"</span>
+      <span class="chip">"I'd break that into two parts…"</span>
+      <span class="chip">"What I've learned building these systems is…"</span>
+      <span class="chip">"The real leverage point in e-commerce like this is…"</span>
+      <span class="chip">"If I were stepping into this role, I'd start with…"</span>
+    </div>
+
+    <h3>Traps to avoid</h3>
+    <div class="chips">
+      <span class="chip bad">Over-explaining your career history</span>
+      <span class="chip bad">Posing as a tile expert</span>
+      <span class="chip bad">Badmouthing Maropost</span>
+      <span class="chip bad">Asking about salary on this call</span>
+      <span class="chip bad">Filling silences</span>
+    </div>
+
+    <h3>Maropost framing (if asked)</h3>
+    <div class="card tmpl" style="margin-top:8px">
+      <button class="copy" data-id="cMaro">Copy</button>
+      <pre id="cMaro">I joined intending to stay long-term, and the work delivered — marketing drove ~55% of net-new revenue. What became clear is that the operating environment limited my ability to compound that impact. At this stage I'm deliberately optimizing for an environment where I can commit for several years and build something durable.</pre>
+    </div>
+
+    <h3>Strong close (last 2 minutes)</h3>
+    <div class="card tmpl" style="margin-top:8px">
+      <button class="copy" data-id="cClose">Copy</button>
+      <pre id="cClose">Adam, I appreciate the time. Based on what you've shared, I'm genuinely interested — [reference one specific thing he said]. I've built growth systems from scratch in lean environments multiple times, and the tile e-commerce funnel has dynamics I'd love to dig into. What would the next step look like?</pre>
+    </div>
+
+    <h3>Follow-up within 2 hours</h3>
+    <div class="card tmpl" style="margin-top:8px">
+      <button class="copy" data-id="cFollow">Copy</button>
+      <pre id="cFollow">Hi Adam — thanks for the time today. Two things stuck with me: [specific point 1] and [specific point 2]. I've been thinking about the sample-to-purchase funnel you mentioned and have a few concrete ideas on tightening that conversion path I'd love to walk through. Genuinely interested — happy to take the next step whenever works.
+— Sal</pre>
+    </div>
+  </section>
+
+  <footer>
+    <span class="label">Urban District — Growth POV &amp; Call Prep</span>
+    Self-contained static app, no build step. <b>Share view</b> hides your private prep (pitch, questions, red flags, fit score, cheat sheet) so you can safely screen-share the growth POV. Picks, task progress &amp; fit scores stay in your browser.
+    Source brief: <code>research/urban-district-tile-interview-prep.md</code>.
+  </footer>
+</div>
+
+<script>
+/* id, label, mode('all'|'prep') */
+const TABS=[
+  ["opportunity","Opportunity","all"],["funnel","Sample Funnel","all"],
+  ["plan","First 90 Days","all"],["segments","B2B / B2C","all"],
+  ["pitch","Your Pitch","prep"],["ask","Ask Adam","prep"],
+  ["flags","Red Flags","prep"],["fit","Fit Score","prep"],["cheat","Cheat Sheet","prep"]
+];
+
+const FUNNEL=[
+  ["01","Discover","Right-fit traffic finds the catalog — visual SEO, Pinterest/IG, paid social, builder channels.","Lever: targeted top-of-funnel by segment + product category."],
+  ["02","Request sample","The macro conversion. Reduce friction; make the 25-sample allowance a feature, not a footnote.","Lever: sample-request CRO + creative that earns the request."],
+  ["03","Sample arrives","The high-intent window opens. Most drop-off happens here from silence.","Lever: triggered nurture + retargeting from the moment it ships."],
+  ["04","Purchase","Convert the sample into an order — bundle, design help, builder pricing, urgency.","Lever: sample→purchase nurture, abandoned-sample retargeting."],
+  ["05","Repeat & refer","Builders reorder; designers bring projects. Referral compounds CAC down.","Lever: trade/loyalty + referral program (the Canon 300% play)."]
+];
+
+const PHASES=[
+  ["Days 1–30 — Instrument & baseline",[
+    ["Stand up the sample-funnel measurement","Define sample→purchase conversion cleanly; wire attribution from request → order, by segment & category."],
+    ["Audit current acquisition & spend efficiency","Where do samples/customers come from today? CAC, ROAS, and the biggest leak in the funnel."],
+    ["Separate the B2B and B2C funnels","Tag and baseline builders vs. designers/homeowners — they convert and reorder very differently."],
+    ["Competitor paid teardown","TileBar & The Tile Shop via Meta Ad Library + Google Ads Transparency — angles, offers, landing pages."]
+  ]],
+  ["Days 31–60 — Optimize the two levers",[
+    ["Lift sample requests (top of funnel)","Sample-request CRO, visual paid social, SEO on high-intent tile queries; segment-specific creative."],
+    ["Build the sample→purchase engine","Triggered email/SMS nurture + retargeting from the moment a sample ships; recover abandoned samples."],
+    ["Launch a builder (B2B) acquisition motion","Trade pricing, account-based outreach, partnerships — capture the 60–65% volume segment."],
+    ["Pilot a referral program","Adapt the Canon play (+300% sign-ups) to drive samples and orders at lower CAC."]
+  ]],
+  ["Days 61–90 — Scale & report",[
+    ["Double down on what converts","Reallocate spend to the segments/channels with the best sample→purchase economics."],
+    ["AOV & repeat-purchase levers","Bundles, design assistance, reorder flows — grow revenue per customer, not just count."],
+    ["Revenue dashboard for Adam","One view tying marketing activity → samples → orders → revenue. Make marketing a revenue driver, not a cost."]
+  ]]
+];
+
+const SEGMENTS=[
+  ["B2B — Builders & contractors","≈60–65% of category volume · repeat · price-sensitive · spec-driven",
+    ["Trade pricing & account programs","Account-based outreach + partnerships (developers, GCs)","Bulk-sample / spec workflows","Reorder & loyalty mechanics","Channels: search, email, direct sales, trade events"]],
+  ["B2C — Homeowners & designers","Higher margin · visual · longer consideration · inspiration-led",
+    ["Visual discovery: Pinterest, Instagram, paid social","Design inspiration content + SEO on project queries","Sample-request CRO + design-help upsell","Retargeting through the consideration window","Referral & UGC (finished-room photos)"]]
+];
+
+const ALIGN=[
+  ["Aggressive demand-gen growth","Built pipeline from a small baseline to $60M+ at NexJ; $27M net-new at Klick"],
+  ["Performance marketing in e-commerce","Canon e-store: $19M (+40%), +300% sign-ups via referral"],
+  ["Lean, fast-moving startup","Thrived at Maropost & NexJ without large teams — build and execute at once"],
+  ["Direct, measurable business impact","Marketing = ~55% of net-new revenue at Maropost; NexJ grew to acquisition"],
+  ["Build, not just execute","Growth architect — built GTM systems from scratch at every stop"],
+  ["AI-enabled modern marketing","Embedded AI into GTM at Klick & Maropost (agents, personalization at scale)"],
+  ["Both B2B and B2C fluency","Canon (B2C e-comm + B2B pipeline), Sun Life (B2C), NexJ (B2B enterprise)"]
+];
+
+const QUESTIONS=[
+  ["Role & immediate priorities",[
+    ["What does the first 90 days look like — build the performance function from scratch, or optimize what's running?","Signals you think in build-vs-optimize terms — and you have both."],
+    ["What's driving most acquisition today, and where's the biggest untapped opportunity?","Gets channel intel and lets you offer a point of view."]
+  ]],
+  ["Growth stage & challenges",[
+    ["'Aggressive demand gen' — is it net-new acquisition, more AOV from existing, or both?","Shows you see growth as a system of levers, not just 'more traffic'."],
+    ["How do you weigh B2B builders/designers vs. B2C homeowners — is one the primary growth focus?","Demonstrates real tile-market research; forces a useful strategic conversation."]
+  ]],
+  ["Team & resources",[
+    ["Would I be the first dedicated performance hire, or is there existing infrastructure?","Clarifies scope — first hire = a builder role, your strength."],
+    ["What's the current marketing/analytics stack — or is defining it part of this role?","Practical; shows you think in systems, not just campaigns."]
+  ]],
+  ["Success metrics",[
+    ["If this hire is wildly successful in 6 months, what does that look like to you?","Gets Adam to articulate success — tells you what he's really hiring for."],
+    ["How is the sample-to-purchase funnel measured today — data infra in place, or part of the build?","Shows deep grasp of the business model. Very strong for a first call."]
+  ]]
+];
+
+const FLAGS=[
+  ["Unclear scope","'We need you to do everything' with no prioritization","If everything's a priority, nothing is — you need focus to deliver"],
+  ["No budget clarity","Evasive on ad spend, tools, resources","No performance marketing without budget; 'well capitalized' should mean real spend"],
+  ["Unrealistic timelines","Expects massive results in 30 days with no infrastructure","Systems take time; expecting magic without foundation is a setup to fail"],
+  ["Solo team forever","No plan to add support or leverage","You can build alone short-term, but scaling needs a team"],
+  ["Founder micromanagement","'I approve every campaign / make all creative calls'","You need autonomy to move fast"],
+  ["Vague compensation","'Above market' but won't discuss ranges","Get specifics before investing more time"],
+  ["No data infrastructure","No analytics, attribution, or CRM","Buildable — but changes the first 90 days dramatically"],
+  ["Two-entity ambiguity","Unclear link between Developments and the e-commerce site","Clarify which entity employs you and the reporting line"]
+];
+
+const FITDIMS=[
+  ["Ownership & autonomy","Will you own the growth function end-to-end?"],
+  ["Resources & budget","Real budget to execute, or 'do more with nothing'?"],
+  ["Founder alignment","Does Adam's vision match your operating style?"],
+  ["Growth potential","A role that grows with the company, or a fixed seat?"],
+  ["Compensation fit","Does 'above market + bonus + equity' mean something real?"],
+  ["Learning & challenge","Will you grow, or just repeat what you've done?"],
+  ["Longevity fit","Can you see 3+ years compounding impact here?"],
+  ["Market opportunity","Is tile e-commerce a real growth market or a niche ceiling?"]
+];
+
+/* ---------- render ---------- */
+const CHK='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+const nav=document.getElementById('nav');
+TABS.forEach(([id,label,mode])=>{const b=document.createElement('button');b.textContent=label;b.dataset.mode=mode;b.dataset.id=id;b.onclick=()=>show(id,b);nav.appendChild(b);});
+nav.firstChild.classList.add('active');
+function show(id,btn){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+
+let MODE='prep';
+function setMode(m){
+  MODE=m;
+  document.getElementById('mPrep').classList.toggle('on',m==='prep');
+  document.getElementById('mShare').classList.toggle('on',m==='share');
+  document.getElementById('modehint').textContent = m==='share'
+    ? 'Share view: private prep hidden — safe to screen-share the growth POV.'
+    : 'Prep view shows everything, including your private pitch, red flags & fit score.';
+  let activeHidden=false;
+  document.querySelectorAll('nav button').forEach(b=>{
+    const hide = (m==='share' && b.dataset.mode==='prep');
+    b.classList.toggle('hidden',hide);
+    if(hide && b.classList.contains('active'))activeHidden=true;
+  });
+  if(activeHidden){const first=nav.querySelector('button:not(.hidden)');show(first.dataset.id,first);}
+}
+
+/* funnel */
+const fs=document.getElementById('funnelSteps');
+FUNNEL.forEach(([k,t,d,lev])=>fs.insertAdjacentHTML('beforeend',`<div class="fstep"><div class="fk">${k}</div><div><b>${t}</b><div class="lev">${d}<br><span style="color:var(--accent)">${lev}</span></div></div></div>`));
+
+/* segments */
+const sg=document.getElementById('segGrid');
+SEGMENTS.forEach(([tag,h,items])=>sg.insertAdjacentHTML('beforeend',`<div class="seg"><div class="tag">${tag.split(' — ')[0]}</div><h4>${tag.split(' — ')[1]}</h4><div class="muted" style="font-size:13px">${h}</div><ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`));
+
+/* tasks */
+const store=JSON.parse(localStorage.getItem('udt_tasks')||'{}');
+const phasesEl=document.getElementById('phases');
+PHASES.forEach((p,pi)=>{
+  const [title,tasks]=p;const wrap=document.createElement('div');wrap.className='phase';
+  wrap.innerHTML=`<div class="phase-h"><h3>${title}</h3><div class="bar"><i id="bar${pi}"></i></div></div>`;
+  tasks.forEach((t,ti)=>{
+    const key=`p${pi}t${ti}`;const done=store[key];
+    const div=document.createElement('div');div.className='task'+(done?' done':'');div.dataset.key=key;
+    div.innerHTML=`<div class="cbx">${CHK}</div><div class="body"><b>${t[0]}</b><span>${t[1]}</span></div>`;
+    div.onclick=()=>{const on=!div.classList.contains('done');store[key]=on;div.classList.toggle('done',on);localStorage.setItem('udt_tasks',JSON.stringify(store));bars();};
+    wrap.appendChild(div);
+  });
+  phasesEl.appendChild(wrap);
+});
+function bars(){PHASES.forEach((p,pi)=>{let d=0;p[1].forEach((_,ti)=>{if(store[`p${pi}t${ti}`])d++;});document.getElementById('bar'+pi).style.width=(d/p[1].length*100)+'%';});}
+function resetTasks(){if(!confirm('Reset task progress?'))return;Object.keys(store).forEach(k=>delete store[k]);localStorage.setItem('udt_tasks','{}');document.querySelectorAll('.task').forEach(d=>d.classList.remove('done'));bars();}
+bars();
+
+/* align */
+const ab=document.getElementById('alignBody');
+ALIGN.forEach(([n,b])=>ab.insertAdjacentHTML('beforeend',`<tr><td>${n}</td><td>${b}</td></tr>`));
+
+/* questions w/ star picks */
+const picks=JSON.parse(localStorage.getItem('udt_picks')||'{}');
+const qEl=document.getElementById('questions');
+QUESTIONS.forEach((grp,gi)=>{
+  const [gl,qs]=grp;const wrap=document.createElement('div');wrap.className='qgroup';
+  wrap.innerHTML=`<div class="gl">${gl}</div>`;
+  qs.forEach((q,qi)=>{
+    const key=`q${gi}_${qi}`;const on=picks[key];
+    const div=document.createElement('div');div.className='qcard'+(on?' pick':'');
+    div.innerHTML=`<div class="star">★</div><div><b>${q[0]}</b><div class="why">Why it lands: ${q[1]}</div></div>`;
+    div.onclick=()=>{const v=!div.classList.contains('pick');picks[key]=v;div.classList.toggle('pick',v);localStorage.setItem('udt_picks',JSON.stringify(picks));};
+    wrap.appendChild(div);
+  });
+  qEl.appendChild(wrap);
+});
+
+/* flags */
+const fb=document.getElementById('flagBody');
+FLAGS.forEach(([a,b,c])=>fb.insertAdjacentHTML('beforeend',`<tr><td>${a}</td><td>${b}</td><td class="muted">${c}</td></tr>`));
+
+/* fit */
+const fitStore=JSON.parse(localStorage.getItem('udt_fit')||'{}');
+const fw=document.getElementById('fitwrap');
+FITDIMS.forEach((d,i)=>{
+  const row=document.createElement('div');row.className='fit';
+  let dots='';for(let n=1;n<=5;n++)dots+=`<div class="dot5${(fitStore[i]>=n)?' fill':''}" data-i="${i}" data-n="${n}">${n}</div>`;
+  row.innerHTML=`<div class="fl"><b>${d[0]}</b><span>${d[1]}</span></div><div class="dots">${dots}</div>`;
+  fw.appendChild(row);
+});
+fw.querySelectorAll('.dot5').forEach(dt=>dt.onclick=()=>{const i=dt.dataset.i,n=+dt.dataset.n;fitStore[i]=(fitStore[i]===n)?0:n;localStorage.setItem('udt_fit',JSON.stringify(fitStore));paintFit();});
+function paintFit(){
+  fw.querySelectorAll('.dot5').forEach(dt=>dt.classList.toggle('fill',fitStore[dt.dataset.i]>=+dt.dataset.n));
+  const vals=FITDIMS.map((_,i)=>fitStore[i]||0).filter(v=>v>0);
+  const v=document.getElementById('verdict');
+  if(vals.length<FITDIMS.length){v.className='verdict mid';v.textContent=`Scored ${vals.length}/${FITDIMS.length}. Complete all dimensions for a recommendation.`;return;}
+  const hi=vals.filter(x=>x>=4).length, lo=vals.filter(x=>x<3).length;
+  if(lo>=3){v.className='verdict no';v.textContent=`⚠ ${lo} dimensions below 3 — serious concerns to resolve before the next step.`;}
+  else if(hi>=6){v.className='verdict go';v.textContent=`✓ ${hi} dimensions at 4–5 — strong proceed. Push for the next step.`;}
+  else{v.className='verdict mid';v.textContent=`Mixed signal — ${hi} strong, ${lo} weak. Worth a second conversation to resolve the gaps.`;}
+}
+function resetFit(){if(!confirm('Reset fit scores?'))return;Object.keys(fitStore).forEach(k=>delete fitStore[k]);localStorage.setItem('udt_fit','{}');paintFit();}
+paintFit();
+
+/* copy */
+document.querySelectorAll('.copy').forEach(b=>b.onclick=()=>{const txt=document.getElementById(b.dataset.id).innerText;navigator.clipboard.writeText(txt).then(()=>{b.textContent='Copied';b.classList.add('ok');setTimeout(()=>{b.textContent='Copy';b.classList.remove('ok');},1500);});});
+</script>
+</body>
+</html>
